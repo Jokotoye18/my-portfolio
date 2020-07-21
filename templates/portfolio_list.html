@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block image_head %}
+<div>
+    <img class="img-fluid " src="{% static 'images/hero_1.jpg' %}" alt="Hero pics">
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="my-5 text-white">
+        <h1 class="project">Live Projects</h1>
+    </div>
+    <main class="row mb-5" role="main">
+        {% for project in project_list %}
+        <div class="col-md-4 mb-3">
+            <div class="card" >
+                <img height="350px" class="card-img-top" src="{{ project.image.url }}" alt="{{ project.title }}">
+                <div class="card-body">
+                    <h5 class="card-title ">{{ project.title }}</h5>
+                    <p class="card-text">{{ project.description|truncatewords:11 }}</p>
+                    <a class="btn" style="background-color: #32dbc6;" href="{% url 'project_detail' project.slug %}">Read more</a>
+                    <a class="btn" target="_blank" style="background-color: #32dbc6;" href="{{ project.source }}">source</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </main>
+</div>
+{% endblock %}
+
