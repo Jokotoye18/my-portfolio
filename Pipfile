@@ -17,6 +17,7 @@ dj-database-url = "*"
 django-heroku = "*"
 django-storages = "*"
 boto3 = "*"
+pylint = "*"
 
 [requires]
 python_version = "3.8"
