@@ -10,12 +10,10 @@
 {% block content %}
 <div class="container">
     <div class="row justify-content-between my-5">
-        <div class="col-md-4">
-            <div class="card">
-                <img class="card-img" src="{% static 'images/Optimized-IMG_20190618_135907_7.02ded70abb11.jpg' %}" alt="Jokotoye Ademola">
-            </div>
+        <div class="col-md-4 my-3">
+            <img class="card-img rounded-circle" src="{% static 'images/Optimized-IMG_20190618_135907_7.02ded70abb11.jpg' %}" alt="Jokotoye Ademola">
         </div>
-        <div class="col-md-7">
+        <div class="col-md-7 my-3">
             <div class="card">
                 <div class="card-body">
                     <p class="lead">Hi there! My name is <a href="https://twitter.com/AkinJokotoye">@AkinJokotoye</a> and am a backend engineer from Nigeria, aspiring full stack engineer.
@@ -25,19 +23,21 @@
             </div>
         </div>
     </div>
-    <div class="my-5 text-white">
+    <div class="my-5 text-white text-center">
         <h1 class="project">Live Projects</h1>
     </div>
     <main class="row mb-5">
         {% for project in project_list %}
-        <div class="col-md-4 mb-3">
+        <div class="col-md-4 mb-5">
             <div class="card" >
-                <img height="350px" class="card-img-top" src="{{ project.image.url }}" alt="{{ project.title }}">
+                <a href="{% url 'project_detail' project.slug %}"><img height="350px" class="card-img-top" src="{{ project.image.url }}" alt="{{ project.title }}"></a>
                 <div class="card-body">
                     <h5 class="card-title ">{{ project.title }}</h5>
-                    <p class="card-text">{{ project.description|truncatewords:11 }}</p>
-                    <a class="btn" style="background-color: #32dbc6;" href="{% url 'project_detail' project.slug %}">Read more</a>
-                    <a class="btn" target="_blank" style="background-color: #32dbc6;" href="{{ project.source }}">source</a>
+                    <hr>
+                    <p class="card-text">{{ project.description|truncatewords:10 }}</p>
+                    <a class="btn" style="background-color: #32dbc6;" target="_blank"  href="{{ project.url }}">See Live</a>
+                    <a class="btn" style="background-color: #32dbc6;" target="_blank" href="{{ project.source }}">Source</a>
+                    <hr>
                 </div>
             </div>
         </div>
