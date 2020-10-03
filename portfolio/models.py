@@ -3,8 +3,8 @@ from django.template.defaultfilters import slugify
 
 
 class Portfolio(models.Model):
-    title = models.CharField(unique=True, max_length=100)
-    slug = models.SlugField(max_length=100)
+    title = models.CharField(unique=True, max_length=100, db_index=True)
+    slug = models.SlugField(max_length=100, db_index=True)
     description = models.TextField()
     technology = models.CharField(max_length=200)
     image = models.ImageField(upload_to="photos")
