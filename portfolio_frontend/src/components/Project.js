@@ -1,22 +1,45 @@
 import React, { Component } from 'react'
-// import { Link } from 'react-router-dom'
+// import ProjectLoading from '../components/ProjectLoading'
+import ProjectItem from './ProjectItem'
+
 
 
 class Project extends Component {
+
+    openProject = () => {
+        const openProjects = document.querySelector('#projects');
+        let body = document.querySelector('body');
+        if (openProjects.textContent.toLowerCase() !== 'see my projects') {
+            openProjects.textContent = 'see my projects';
+        }else{
+            openProjects.textContent = 'close projects'
+        }
+        body.classList.toggle('make-projects-visible');
+    }
+
     render() {
         const { projects } = this.props
         const projectComponents = projects.map((project) => {
-            return (
-                <div key={project.id}>
-                    <h1>{project.title}</h1>
-                    <p>{project.description}</p>
-                    <img src={project.image} alt={project.image.name} />
-                    <a style={{display: 'block'}} href={project.hyper_url}>Detail</a>
-                </div>
+            return ( 
+                <ProjectItem project={project} maxLength={70} key={project.id} />
             )
         })
         return (
-            <div>{projectComponents}</div>
+            <>
+            <section className="open-projects">
+                <div className="container">
+                    <button onClick={this.openProject} id="projects" className="btn btn-link" >see my projects</button>
+                </div>
+            </section>
+            <section className="project-section">
+                    <div className="container">
+                        <h3 className="project-head">Live Projects</h3>
+                        <div className='project-grid'>
+                            {projectComponents}
+                        </div>
+                    </div>
+            </section>
+            </>
         )
     }
 }
