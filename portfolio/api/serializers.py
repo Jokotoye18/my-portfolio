@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from portfolio.models import Portfolio
+from portfolio.models import Contact
 
 
 class PortfolioSerializer(serializers.HyperlinkedModelSerializer):
@@ -20,3 +21,8 @@ class PortfolioSerializer(serializers.HyperlinkedModelSerializer):
             "source",
             "url",
         ]
+
+class ContactSerializer(serializers.ModelSerializer):
+   class Meta:
+        model = Contact
+        fields = ['name', 'email', 'message']

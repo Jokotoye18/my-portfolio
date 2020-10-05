@@ -47,12 +47,15 @@ INSTALLED_APPS = [
     # third party
     "crispy_forms",
     "admin_honeypot",
-    "storages",
+    "storages" ,
     "rest_framework",
     "corsheaders",
+    'webpack_loader',
+
 
     # local app
     "portfolio.apps.PortfolioConfig",
+    'frontend',
 ]
 
 MIDDLEWARE = [
@@ -72,7 +75,7 @@ ROOT_URLCONF = "personnal_portfolio.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, "portfolio_frontend")],
+        # "DIRS": [os.path.join(BASE_DIR, "portfolio_frontend")],
         'APP_DIRS': True,
         "OPTIONS": {
             "context_processors": [
@@ -142,12 +145,13 @@ USE_TZ = True
 STATIC_URL = "/static/"
 # STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
-REACT_APP_DIR = os.path.join(BASE_DIR, 'portfolio_frontend')
+# REACT_APP_DIR = os.path.join(BASE_DIR, 'portfolio_frontend')
 
-STATICFILES_DIRS = [
-    os.path.join(REACT_APP_DIR, 'build', "static"),
-]
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+# STATICFILES_DIRS = [
+#     os.path.join(REACT_APP_DIR, 'build', "static"),
+# ]
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
 MEDIA_URL = "/media/"
@@ -172,12 +176,28 @@ try:
 except ImportError:
     pass
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = config('EMAIL_HOST') 
+EMAIL_HOST_USER = config('EMAIL_HOST_USER') 
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD') 
+EMAIL_PORT = config('EMAIL_PORT', cast=int)
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
+
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+WEBPACK_LOADER = {
+  'DEFAULT': {
+    'BUNDLE_DIR_NAME': 'frontend/',
+    'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json')
+  }
+}
 
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny",]
+    
 }
 
 django_heroku.settings(locals())

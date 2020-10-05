@@ -1,1 +1,0 @@
-const toggler = document.querySelector('#toggler')

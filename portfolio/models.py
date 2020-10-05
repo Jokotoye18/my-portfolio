@@ -22,3 +22,13 @@ class Portfolio(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
+
+
+class Contact(models.Model):
+    name = models.CharField(max_length=150, blank=True)
+    email = models.EmailField(max_length=254)
+    message = models.TextField()
+
+    def __str__(self):
+        return self.name
+    
