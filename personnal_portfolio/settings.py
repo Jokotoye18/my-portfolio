@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "admin_honeypot",
     "storages" ,
     "rest_framework",
+    'corsheaders',
 
 
     # local app
@@ -187,6 +188,7 @@ DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 #   }
 # }
 
+CORS_ORIGIN_ALLOW_ALL = True
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny",],
