@@ -1,12 +1,10 @@
 from django.shortcuts import render
-from django.views.decorators.cache import never_cache
 # from django.views.generic import ListView, DetailView
 # from .models import Portfolio
 
 
-@never_cache
 def index(request):
-    return render(request, "build/index.html")
+    return render(request, "index.html")
 
 # class ProjectList(ListView):
 #     model = Portfolio

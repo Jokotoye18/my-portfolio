@@ -20,7 +20,6 @@ boto3 = "*"
 pylint = "*"
 django-rest-framework = "*"
 django-cors-headers = "*"
-django-webpack-loader = "*"
 
 [requires]
 python_version = "3.8"

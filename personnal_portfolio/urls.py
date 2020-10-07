@@ -9,7 +9,6 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
     path('admin@jokotoye18/', admin.site.urls),
-    path('', include('frontend.urls')),
     path('', include('portfolio.urls')),
     path('api/', include('portfolio.api.urls'))
 ]

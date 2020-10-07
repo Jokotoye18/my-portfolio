@@ -50,12 +50,10 @@ INSTALLED_APPS = [
     "storages" ,
     "rest_framework",
     "corsheaders",
-    'webpack_loader',
 
 
     # local app
     "portfolio.apps.PortfolioConfig",
-    'frontend',
 ]
 
 MIDDLEWARE = [
@@ -75,7 +73,7 @@ ROOT_URLCONF = "personnal_portfolio.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        # "DIRS": [os.path.join(BASE_DIR, "portfolio_frontend")],
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
         'APP_DIRS': True,
         "OPTIONS": {
             "context_processors": [
@@ -143,15 +141,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = "/static/"
-# STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-
-# REACT_APP_DIR = os.path.join(BASE_DIR, 'portfolio_frontend')
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 
-# STATICFILES_DIRS = [
-#     os.path.join(REACT_APP_DIR, 'build', "static"),
-# ]
-# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATICFILES_DIRS = [
+    os.path.join(os.path.join(BASE_DIR, 'static')),
+]
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
 MEDIA_URL = "/media/"
@@ -187,17 +183,20 @@ DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-WEBPACK_LOADER = {
-  'DEFAULT': {
-    'BUNDLE_DIR_NAME': 'frontend/',
-    'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json')
-  }
-}
+# WEBPACK_LOADER = {
+#   'DEFAULT': {
+#     'BUNDLE_DIR_NAME': 'frontend/',
+#     'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json')
+#   }
+# }
 
 
 REST_FRAMEWORK = {
-    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny",]
-    
+    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny",],
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ]
 }
 
 django_heroku.settings(locals())

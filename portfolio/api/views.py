@@ -37,7 +37,7 @@ class SendMail(GenericAPIView):
             subject = 'Contact message received'
             from_email = settings.DEFAULT_FROM_EMAIL
             to_email = [to_email]
-            send_mail(subject, subscribe_message, from_email, to_email)
+            send_mail(subject, subscribe_message, from_email, to_email, fail_silently=True)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         # serializer.is_valid(raise_exception=True)
