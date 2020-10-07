@@ -45,11 +45,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     # third party
-    "crispy_forms",
     "admin_honeypot",
     "storages" ,
     "rest_framework",
-    "corsheaders",
 
 
     # local app
@@ -181,7 +179,6 @@ EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
 
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 
-CORS_ORIGIN_ALLOW_ALL = True
 
 # WEBPACK_LOADER = {
 #   'DEFAULT': {
