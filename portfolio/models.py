@@ -2,7 +2,20 @@ from django.db import models
 from django.template.defaultfilters import slugify
 
 
+class ProjectTech(models.Model):
+    name = models.CharField(max_length=100)
+
+    class Meta:
+        ordering = ["name"]
+
+    def __str__(self):
+        return self.name
+    
+    
+
+
 class Portfolio(models.Model):
+    project_tech = models.ForeignKey(ProjectTech, on_delete=models.CASCADE)
     title = models.CharField(unique=True, max_length=100, db_index=True)
     slug = models.SlugField(max_length=100, db_index=True)
     description = models.TextField()

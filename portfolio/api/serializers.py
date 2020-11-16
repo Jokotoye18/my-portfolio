@@ -7,6 +7,7 @@ class PortfolioSerializer(serializers.HyperlinkedModelSerializer):
     hyper_url = serializers.HyperlinkedIdentityField(
         view_name="portfolio-detail", lookup_field="slug"
     )
+    project_tech = serializers.CharField(source='project_tech.name')
 
     class Meta:
         model = Portfolio
@@ -20,6 +21,7 @@ class PortfolioSerializer(serializers.HyperlinkedModelSerializer):
             "image",
             "source",
             "url",
+            "project_tech"
         ]
 
 class ContactSerializer(serializers.ModelSerializer):
